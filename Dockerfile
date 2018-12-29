@@ -2,7 +2,7 @@ FROM alpine:3.8
 MAINTAINER Stanislav Mekhonoshin <ejabberd@gmail.com>
 
 RUN apk update
-RUN apk add openvpn
+RUN apk add openvpn vim curl
 COPY ./entrypoint.sh /entrypoint.sh
 
 RUN apk --no-cache --update add privoxy wget ca-certificates bash p7zip && \
@@ -18,9 +18,7 @@ RUN apk --no-cache --update add privoxy wget ca-certificates bash p7zip && \
     echo 'actionsfile ab2p.system.action' >> /etc/privoxy/config && \
     echo 'actionsfile ab2p.action' >> /etc/privoxy/config && \
     echo 'filterfile ab2p.system.filter' >> /etc/privoxy/config && \
-    echo 'filterfile ab2p.filter' >> /etc/privoxy/config && \
-    rm -Rf temp ab2p.all_rus.7z && \
-    apk del bash p7zip
+    echo 'filterfile ab2p.filter' >> /etc/privoxy/config
 RUN chown privoxy.privoxy /etc/privoxy/*
 
 EXPOSE 8118
